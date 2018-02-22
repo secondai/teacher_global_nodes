@@ -1,0 +1,12 @@
+{
+  "_id": "5a3760428edbea00403aee6b",
+  "type": "code:0.0.1:local:32498h32f2",
+  "data": {
+    "code": "(()=>{\n  return new Promise(async (resolve, reject)=>{\n    try {\n      \n      // Parse text result!\n      // - returns an Array of possible parse things to to \n      //   - this should trigger an Event (\"before returning results\" in case I want to auto-choose something) \n      \n      // Run Capability: UserCommand.parseTextWithNodes\n      \n\n      let parseResponse = await universe.loadAndRunCapability('UserCommand',{},{\n        type: 'standard_capability_action:0.0.1:local:298j291bs',\n        data: {\n          action: 'parseTextWithNodes',\n          options: INPUT.data \n          // {\n          //   text: String,\n          //   contextNodes: [Node]\n          // }\n        }\n      });\n      \n      \n      console.log('ParseResponse Data?', parseResponse.data ? true:false);\n      \n      let matches = parseResponse.data.matches;\n      \n      // \"parsed\" should return multiple possible Nodes that matched \n      // - used for Confirmation (and editing) \n      let parsed = [{\n        type: 'parsed_result:...',\n        data: {\n          text: INPUT.data.text\n        }\n      }]\n      \n      resolve({\n        type: 'user_text_command_output:...',\n        data: {\n          matches,\n          parsed,\n          parseResponse\n        }\n      });\n        \n        \n    }catch(err){\n      resolve({ERROR: true, err: err.toString()});\n    }\n    \n    \n  })\n})()",
+    "note": "parse text and run command",
+    "key": "30d1ee66-bd68-4eb1-94c6-50d713b744ac"
+  },
+  "active": true,
+  "createdAt": 1513578562633,
+  "updatedAt": 1513898303879
+}

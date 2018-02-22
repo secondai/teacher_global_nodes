@@ -1,0 +1,12 @@
+{
+  "_id": "5a373cdb8edbea00403aee6a",
+  "type": "code:0.0.1:local:32498h32f2",
+  "data": {
+    "key": "8495bcb0-a54b-4443-be14-5a35e4035e18",
+    "note": "Action: update_code_from_teacher ",
+    "code": "(()=>{\n  return new Promise(async (resolve, reject)=>{\n    try {\n      \n      // todo: make a request to a remote Second to be taught something \n      // - \"i want to learn about X\" \n      \n      let teacherResponse = await universe.loadAndRunCapability('Teacher',{},{\n        type: 'standard_capability_action:0.0.1:local:298j291bs',\n        data: {\n          action: 'updateLocalCode',\n          options: {}\n        }\n      });\n      \n      // Iterate over returned \"to Update\" nodes \n      let toUpdate = teacherResponse.data || [];\n      \n      console.log('Got local toUpdate', toUpdate.length, toUpdate);\n      \n      // overwrite...\n      for(let data of toUpdate){\n        let nodeToSave = data.old;\n        nodeToSave.data.code = data.new.data.code;\n        \n        console.log('Updating Local NodeToSave:', nodeToSave);\n        let updatedNode = await universe.updateNode(nodeToSave);\n      }\n      \n      resolve({\n        type: 'updated_node_results:...',\n        data: {\n          updated: toUpdate\n        }\n      });\n        \n        \n    }catch(err){\n      resolve({ERROR: true, err: err.toString()});\n    }\n    \n    \n  })\n})()"
+  },
+  "active": true,
+  "createdAt": 1513569499583,
+  "updatedAt": 1513571313550
+}
