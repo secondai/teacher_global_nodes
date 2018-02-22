@@ -1,0 +1,9 @@
+{
+	"name":"Cloud Smart Assistant Default",
+	"version" : "0.0.1",
+	"author" : "Nicholas Reed",
+	"secondtype" : "bundle",
+	"environment" : {
+		"dependencies" : []
+	}
+}
